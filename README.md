@@ -6,8 +6,14 @@ The redirects live in this organization-level site rather than in a repository n
 
 ## How to add a renamed project
 
+Add the old and new names to the `RENAMES` table in [`404.html`](404.html). This covers a whole documentation site per entry, but depends on JavaScript.
+
+## Per-page redirects
+
 ```bash
 ./generate-redirects.py qiskit-addon-sqd qiskit-sqd
 ```
 
-This writes one `meta refresh` page per page of the new site, so the redirects do not depend on JavaScript. It requires the `gh` CLI, since the page list comes from the new site's most recent `github-pages` artifact. This script assumes that only the repository name changed, so a page dropped by the rename gets no redirect.
+This writes one `meta refresh` page per page of the new site, so it does not depend on JavaScript, and it takes precedence over the `RENAMES` table. It requires the `gh` CLI.
+
+Both methods assume that only the repository name changed.

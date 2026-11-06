@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Page not found</title>
+        <script type="text/javascript">
+            // GitHub Pages serves a custom 404 only from the root of the site,
+            // so this one page handles every renamed repository. It is reached
+            // because a renamed repository no longer claims its old path here.
+            var RENAMES = {
+                "qiskit-addon-aqc-tensor": "qiskit-aqc-tensor",
+                "qiskit-addon-cutting": "qiskit-cutting",
+                "qiskit-addon-dice-solver": "qiskit-dice-solver",
+                "qiskit-addon-mpf": "qiskit-mpf",
+                "qiskit-addon-mthree": "qiskit-mthree",
+                "qiskit-addon-obp": "qiskit-obp",
+                "qiskit-addon-opt-mapper": "qiskit-opt-mapper",
+                "qiskit-addon-pna": "qiskit-pna",
+                "qiskit-addon-slc": "qiskit-slc",
+                "qiskit-addon-sqd": "qiskit-sqd",
+                "qiskit-addon-sqd-hpc": "qiskit-sqd-hpc",
+            };
+
+            var segments = window.location.pathname.replace(/^\//, "").split("/");
+            var newName = RENAMES[segments[0]];
+            if (newName) {
+                // The renames left every path below the repository name intact,
+                // so the rest of the URL carries over unchanged.
+                segments[0] = newName;
+                var target = "https://qiskit.github.io/" + segments.join("/") +
+                    window.location.search + window.location.hash;
+                // Replaces the body too, for the rare case where the
+                // redirect is blocked or slow enough to render. Only this
+                // branch knows a rename applies, so the static body below
+                // stays generic for every other missing path.
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.title = "Redirecting to " + newName;
+                    document.body.innerHTML =
+                        "<h1>Redirecting</h1><p>This project was renamed to " +
+                        "<code>" + newName + "</code>. If you are not " +
+                        "redirected automatically, go to <a href=\"" +
+                        target + "\">" + target + "</a>.</p>";
+                });
+                window.location.replace(target);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Page not found</h1>
+        <p>
+            <code>qiskit.github.io</code> has no page at this address. Browse
+            the organization at
+            <a href="https://github.com/Qiskit">github.com/Qiskit</a>.
+        </p>
+    </body>
+</html>
